@@ -60,3 +60,39 @@ exports.postGate = async (req,res) => {
         res.status(500).json({message: 'Error while attempting to create a Gate.'});
     }
 }
+
+exports.updateGate = async (req,res) => {
+    const {id} = req.params;
+    try {
+        const [updateRow] = await Gate.update(req.body, {
+            where: {id}
+        });
+
+        if(updateRow === 1) {
+            res.json({message: 'Gate successfully updated.'})
+        } else {
+            res.status(500).json({error: "Gate not found."})
+        }
+    } catch (error) {
+        console.error('Error while attempting to update a Gate.',error);
+        res.status(500).json({error: 'Error while attempting to update a Gate.'});
+    };
+};
+
+exports.deleteGate = async (req,res) => {
+    const {id} = req.params;
+    try {
+        const [hideRow] = await Gate.update({
+            active: false
+        },{
+            where: {id}
+        });
+
+        if(hideRow === 1) {
+            res.json({message: 'Gate succesfully deleted.'})
+        }
+    } catch (error) {
+        console.error('Error while attempting to delete a Gate.');
+        res.status(500).json({error: 'Error while attempting to delete a Gate.'});
+    }
+}
