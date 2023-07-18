@@ -24,7 +24,11 @@ const Gate = connection.define('Gate', {
     timestamps: false
 });
 
-Gate.hasOne(Aircraft, {
+Aircraft.hasOne(Gate, {
+    foreignKey: 'id'
+});
+
+Gate.belongsTo(Aircraft, {
     foreignKey: 'aircraft_id'
 });
 

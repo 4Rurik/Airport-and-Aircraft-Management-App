@@ -1,17 +1,14 @@
 const connection = require('./config/db');
 const express = require('express');
 const bodyParser = require('body-parser');
-const {getAircrafts,postAircraft,updateAircraft,deleteAircraft} = require('./controllers/AircraftController');
+const aircraftRouter = require('./routes/AircraftRouter');
 
 const port = 3000;
 const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/aircrafts',getAircrafts);
-app.post('/aircrafts',postAircraft);
-app.put('/aircrafts/:id',updateAircraft);
-app.delete('/aircrafts/:id',deleteAircraft);
+app.use(aircraftRouter);
 
 connection.sync().then(() => {
     console.log("Application successfully synched.");

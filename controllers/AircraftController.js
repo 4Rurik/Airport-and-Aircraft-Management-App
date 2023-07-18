@@ -1,4 +1,4 @@
-const Aircraft = requires('../models/Aircraft');
+const Aircraft = require('../models/Aircraft');
 const express = require('express');
 
 exports.getAircrafts = async (req,res) => {

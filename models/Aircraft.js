@@ -1,6 +1,5 @@
 const sequelize = require('sequelize');
 const connection = require('../config/db');
-const Gate = require('./Gate');
 
 const Aircraft = connection.define('Aircraft', {
     id: {
@@ -30,10 +29,6 @@ const Aircraft = connection.define('Aircraft', {
     }
 },{
     timestamps: false
-});
-
-Aircraft.belongsTo(Gate, {
-    foreignKey: 'aircraft_id'
 });
 
 module.exports = Aircraft;
