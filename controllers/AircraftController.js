@@ -18,7 +18,8 @@ exports.postAircraft = async (req,res) => {
             airline,
             aircraft_registration,
             capacity,
-            aircraft_status
+            aircraft_status: 'Available',
+            active: true
         });
 
         res.status(201).json(newAircraft);
@@ -50,6 +51,7 @@ exports.deleteAircraft = async (req,res) => {
     const {id} = req.params;
     try {
         const [hideRow] = await Aircraft.update({
+            aircraft_status: 'Unavailable',
             active: false
         },{
             where: {id}

@@ -19,6 +19,10 @@ const Gate = connection.define('Gate', {
     aircraft_id: {
         type: sequelize.INTEGER,
         allowNull: true
+    },
+    active: {
+        type: sequelize.BOOLEAN,
+        allowNull: true
     }
 },{
     timestamps: false

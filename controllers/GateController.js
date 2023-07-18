@@ -17,10 +17,9 @@ exports.getGates = async (req,res) => {
 exports.getAvailableGates = async (req,res) => {
     try {
         const gatesA = await Gate.findAll({
-            include: [{
-                model: Aircraft,
-                where: {availability: true}
-            }]
+            where: {
+                availability: true
+            }
         });
 
         res.status(200).json(gatesA);
@@ -35,14 +34,36 @@ exports.getUnavailableGates = async (req,res) => {
         const gatesU = await Gate.findAll({
             include: [{
                 model: Aircraft,
-                where: {availability: false}
-            }]
+                where: {aircraft_status: 'On Gate'}
+            }],
+            where: {
+                availability: false
+            }
         });
 
         res.status(200).json(gatesU);
     } catch (error) {
         console.error('Error while attempting to get the Gate.',error);
         res.status(500).json({message: 'Error while attempting to get the Gate.'});
+    }
+}
+
+exports.getGateAvailability = async (req,res) => {
+    const {id} = req.params;
+    try {
+        const gate = await Gate.findByPk(id);
+
+        if (gate.availability) {
+            res.json({
+                name: gate.gate,
+                availability: gate.availability
+            });
+        } else {
+            res.json({ message: 'This Gate is currently unavailable.'})
+        }
+    } catch (error) {
+        console.error('Error while attempting to get the availability of the Gate.', error);
+        res.status(500).json({error: 'Error while attempting to get the availability of the Gate.'})
     }
 }
 
@@ -94,5 +115,26 @@ exports.deleteGate = async (req,res) => {
     } catch (error) {
         console.error('Error while attempting to delete a Gate.');
         res.status(500).json({error: 'Error while attempting to delete a Gate.'});
-    }
-}
+    };
+};
+
+exports.assignToGate = async (req,res) => {
+    const {id} = req.params;
+    try {
+        const gate = await Gate.findByPk(id);
+
+        if(gate.availability) {
+            const {aircraft_id} = req.body;
+            gate.aircraft_id = aircraft_id;
+            gate.availability = false;
+
+            await gate.save();
+            res.json({message: "Aircraft has been successfully assigned to the Gate."});
+        } else {
+            res.status(500).json({nessage: "Gate is currently unavailable."});
+        }
+    } catch (error) {
+        console.error('Error while attempting to assign an Aircraft to a Gate.',error);
+            res.status(500).json({error: 'Error while attempting to assign an Aircraft to a Gate.'});
+    };
+};

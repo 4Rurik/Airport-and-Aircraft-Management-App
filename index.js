@@ -2,6 +2,7 @@ const connection = require('./config/db');
 const express = require('express');
 const bodyParser = require('body-parser');
 const aircraftRouter = require('./routes/AircraftRouter');
+const gateRouter = require('./routes/GateRouter');
 
 const port = 3000;
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(aircraftRouter);
+app.use(gateRouter);
 
 connection.sync().then(() => {
     console.log("Application successfully synched.");
