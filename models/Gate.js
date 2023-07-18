@@ -9,8 +9,12 @@ const Gate = connection.define('Gate', {
         autoIncrement: true
     },
     gate: {
+        type: sequelize.STRING,
+        allowNull: false
+    },
+    availability: {
         type: sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: false
     },
     aircraft_id: {
         type: sequelize.INTEGER,
@@ -23,5 +27,11 @@ const Gate = connection.define('Gate', {
 Gate.hasOne(Aircraft, {
     foreignKey: 'aircraft_id'
 });
+
+Gate.prototype.isAvailable = () => {
+    if(this.availability) {
+        return "Available.";
+    }
+}
 
 module.exports = Gate;

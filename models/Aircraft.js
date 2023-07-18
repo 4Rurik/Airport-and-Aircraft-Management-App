@@ -25,8 +25,11 @@ const Aircraft = connection.define('Aircraft', {
         allowNull: false
     },
     active: {
-        type: sequelize.BOOLEAN
+        type: sequelize.BOOLEAN,
+        allowNull: false
     }
+},{
+    timestamps: false
 });
 
 Aircraft.belongsTo(Gate, {
