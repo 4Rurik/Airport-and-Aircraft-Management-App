@@ -24,9 +24,6 @@ export default function Navbar() {
                             <li>
                                 <Link className='dropdown-item' to={'/aircrafts/update'}>Edit an Aircraft</Link>
                             </li>
-                            <li>
-                                <Link className='dropdown-item' to={'/aircrafts/delete'}>Remove an Aircraft</Link>
-                            </li>
                         </ul>
                     </li>
                     <li className="nav-item dropdown">
@@ -40,9 +37,6 @@ export default function Navbar() {
                             </li>
                             <li>
                                 <Link className="dropdown-item" to={'/gates/update'}>Edit a Gate</Link>
-                            </li>
-                            <li>
-                                <Link className="dropdown-item" to={'/gates/delete'}>Remove a Gate</Link>
                             </li>
                         </ul>
                     </li>

@@ -1,8 +1,5 @@
-//import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-//export const useBackendData = () => {
-//const [backendData, setBackendData] = useState([]);
 export const getAircrafts = () => {
     axios.get('http://localhost:4000/aircrafts')
     .then(
@@ -10,7 +7,6 @@ export const getAircrafts = () => {
          console.log(res.data);
         let data = res.data;
         return data;
-        //setBackendData(res.data);
       }
     )
   }
@@ -37,6 +33,7 @@ export const getAircrafts = () => {
 
   export const deleteAircraft = (id) => {
     axios.delete(`http://localhost:4000/aircrafts/${id}`)
+    window.location.reload();
   }
 
   export const assignAircraft = (id,aircraft_id) => {
@@ -44,9 +41,3 @@ export const getAircrafts = () => {
       aircraft_id: aircraft_id
     }
   }
-//  useEffect(() => {
-//    fetchData();
-//  }, []);
-
-//  return { backendData, fetchData };
-//};

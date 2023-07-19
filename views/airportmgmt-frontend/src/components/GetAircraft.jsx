@@ -11,15 +11,14 @@ const [aircrafts, setAircrafts] = useState([]);
     .then(
       (res) => {
          console.log(res.data);
-        let datos = res.data;
-        setAircrafts(datos);
+        let data = res.data;
+        setAircrafts(data);
   })}
     fetch();
   }, [])
 
   return (
       <div className='container'>
-       GetAircraft
         <Navbar/>
         { aircrafts ? aircrafts.map((value,i) => {
         return <Aircrafts key={i} aircraft={value}/>

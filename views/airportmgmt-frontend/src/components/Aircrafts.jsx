@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react'
+import { deleteAircraft } from '../service/aircraftService'
 
 
 export default function Aircrafts({aircraft}) {
-    const [oneAircraft,setOneAircraft] = useState({})
+  const [oneAircraft,setOneAircraft] = useState({})
   useEffect(()=>{
     setOneAircraft(aircraft)
   })
@@ -12,18 +13,17 @@ export default function Aircrafts({aircraft}) {
         <div className="card" style={{width: "18rem"}}>
           <div className="card-body" >
             <h5 className="card-title">{oneAircraft.airline}</h5>
-            <p className="card-text">Some {oneAircraft.id} quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p className="card-text">Aircraft Registration: {oneAircraft.aircraft_registration}</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">Capacity: {oneAircraft.capacity}</li>
+            <li class="list-group-item">Status: {oneAircraft.aircraft_status}</li>
           </ul>
           <div class="card-body">
-            <button className='btn btn-danger' onClick={() => console.log(`${oneAircraft.id}`)}>Delete</button>
+            <button className='btn btn-danger' onClick={() => deleteAircraft(`${oneAircraft.id}`)}>Delete</button>
           </div>
         </div>
-: console.log("Que mira bobo")} 
+: console.log("")} 
     </div>
   )
 }
