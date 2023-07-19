@@ -1,10 +1,11 @@
 import React from 'react'
 import Navbar from './Navbar'
 
-export default function Home() {
+export default function GatesUnavailable() {
   return (
     <div className='container'>
-      <Navbar/>
+        GatesUnavailable
+        <Navbar/>
     </div>
   )
 }
