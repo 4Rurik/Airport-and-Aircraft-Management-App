@@ -8,7 +8,7 @@ export default function Aircrafts({aircraft}) {
     setOneAircraft(aircraft)
   })
   return (
-    <div className='container'>
+    <div className='container text-center'>
       {aircraft.active == 1 ? 
         <div className="card" style={{width: "18rem"}}>
           <div className="card-body" >
