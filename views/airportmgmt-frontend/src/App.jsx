@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
 
 function App() {
 
@@ -19,22 +21,10 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Hola</h1>
-      {backendData.map((value) => {
-        return <div className="card m-2">
-          <div className="card-header">
-            <h1>{value.airline}</h1>
-          </div>
-          <div className="card-body">
-            <h1>{value.aircraft_registration}</h1>
-            <h1>{value.aircraft_status}</h1>
-            <h1>{value.capacity}</h1>
-          </div>
-        </div>
-      })}
-    </div>
-  )
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+      </Routes>
+  );
 }
 
 export default App
